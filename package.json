@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc --noEmit && vite build",
+    "build": "node scripts/build.mjs",
     "preview": "vite preview",
     "prepare:geo": "node scripts/prepare-geo.mjs",
     "import:summary": "node scripts/import-summary.mjs"
