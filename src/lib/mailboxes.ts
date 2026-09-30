@@ -20,15 +20,18 @@ export type Mailbox = {
   color: string;
 };
 
-/** Phase figures. A country stays within 10% of these, and the record-weighted average matches them. */
+/**
+ * Phase figures, grown in proportion to their size so they add up to the 94.38% personal share.
+ * A country stays within 10% of these, and the record-weighted average matches them.
+ */
 export const MAILBOXES: Mailbox[] = [
-  { id: 'gmail', label: 'Gmail', pct: 42.87, color: '#EA4335' },
-  { id: 'yahoo', label: 'Yahoo', pct: 16.42, color: '#6001D2' },
-  { id: 'hotmail', label: 'Hotmail', pct: 15.4, color: '#F15A22' },
-  { id: 'aol', label: 'AOL', pct: 2.72, color: '#F4F7FB' },
-  { id: 'live', label: 'Live', pct: 1.74, color: '#00A4EF' },
-  { id: 'apple', label: 'Apple', pct: 0.58, color: '#F5F5F7' },
-  { id: 'outlook', label: 'Outlook', pct: 0.37, color: '#0F6CBD' },
+  { id: 'gmail', label: 'Gmail', pct: 50.51, color: '#EA4335' },
+  { id: 'yahoo', label: 'Yahoo', pct: 19.35, color: '#6001D2' },
+  { id: 'hotmail', label: 'Hotmail', pct: 18.14, color: '#F15A22' },
+  { id: 'aol', label: 'AOL', pct: 3.2, color: '#F4F7FB' },
+  { id: 'live', label: 'Live', pct: 2.05, color: '#00A4EF' },
+  { id: 'apple', label: 'Apple', pct: 0.68, color: '#F5F5F7' },
+  { id: 'outlook', label: 'Outlook', pct: 0.44, color: '#0F6CBD' },
   { id: 'privacy', label: 'Privacy', pct: 0.01, color: '#C9B6FF' },
 ];
 
