@@ -25,10 +25,16 @@ export function ramp(t: number) {
   return `rgb(${r}, ${g}, ${b})`;
 }
 
+/** Log scale so every country stays visible. The largest market leads, nobody disappears. */
+export function presence(value: number, max: number) {
+  if (value <= 0 || max <= 0) return 0;
+  const t = Math.log10(value) / Math.log10(max);
+  return Math.min(1, Math.max(0, t));
+}
+
 export function extrusion(value: number, max: number, hot: boolean) {
   if (value <= 0 || max <= 0) return 0.001;
-  const t = Math.sqrt(value / max);
-  return 0.004 + t * 0.1 + (hot ? 0.018 : 0);
+  return 0.008 + presence(value, max) * 0.05 + (hot ? 0.014 : 0);
 }
 
 export type LandTone = 'empty' | 'dim' | 'hot' | 'idle';
@@ -37,7 +43,7 @@ export function capColor(value: number, max: number, tone: LandTone) {
   if (tone === 'empty') return 'rgba(170, 200, 255, 0.045)';
   if (tone === 'dim') return 'rgba(90, 110, 150, 0.08)';
   if (tone === 'hot') return '#b8f6ff';
-  return ramp(Math.sqrt(value / Math.max(max, 1)));
+  return ramp(0.38 + presence(value, Math.max(max, 1)) * 0.62);
 }
 
 export function sideColor(tone: LandTone) {

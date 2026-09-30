@@ -1,10 +1,11 @@
 import { useEffect, useMemo, useRef } from 'react';
 import type { CountryRow, PhaseStats } from '../lib/analytics';
-import { ramp } from '../lib/color';
-import { formatCompact, formatFull, formatPct } from '../lib/format';
+import { presence, ramp } from '../lib/color';
+import { formatCompact, formatFull } from '../lib/format';
 import { useCountUp } from '../lib/useCountUp';
 import type { PhaseFile } from '../phases/types';
 import type { RegionId } from '../lib/regions';
+import { Flag } from './Flag';
 
 type Props = {
   phase: PhaseFile;
@@ -74,7 +75,7 @@ export function CommandDeck({
       <h1>{phase.title}</h1>
       <p className="hero-num">{formatFull(total)}</p>
       <p className="hero-sub">{phase.noun} in this phase</p>
-      <p className="hint">Taller and brighter on the planet means more {phase.noun}.</p>
+      <p className="hint">Open any country. The number is the records on file.</p>
 
       <div className="stat-grid">
         <article>
@@ -82,16 +83,16 @@ export function CommandDeck({
           <strong>{formatFull(stats.locations.length)}</strong>
         </article>
         <article>
-          <small>Leader</small>
-          <strong>{formatPct(leader.share)}</strong>
+          <small>Regions</small>
+          <strong>{formatFull(stats.regions.length)}</strong>
         </article>
         <article>
-          <small>Top 5</small>
-          <strong>{formatPct(stats.top5Share)}</strong>
+          <small>Unmapped</small>
+          <strong>{stats.unknown ? formatCompact(stats.unknown.value) : '0'}</strong>
         </article>
         <article>
-          <small>Top 10</small>
-          <strong>{formatPct(stats.top10Share)}</strong>
+          <small>Broadest reach</small>
+          <strong className="stat-name">{stats.regions[0]?.id ?? '—'}</strong>
         </article>
       </div>
 
@@ -125,14 +126,14 @@ export function CommandDeck({
           </span>
           <span>
             <b>{formatCompact(stats.unknown.value)}</b>
-            <em>{stats.unknownRank ? `would rank ${stats.unknownRank}` : formatPct(stats.unknown.share)}</em>
+            <em>no country code</em>
           </span>
         </button>
       )}
 
       <div className="list-head">
         <span>{region ? shown.length : `${shown.length} countries`}</span>
-        <span>Share</span>
+        <span>Records</span>
       </div>
       <ol className="rank-list">
         {shown.map((row) => (
@@ -168,7 +169,7 @@ function CountryButton({
   onHover: (code: string | null) => void;
   onSelect: (code: string | null) => void;
 }) {
-  const width = leaderValue > 0 ? (row.value / leaderValue) * 100 : 0;
+  const depth = 34 + presence(row.value, leaderValue) * 66;
   return (
     <button
       id={`country-${row.code}`}
@@ -182,16 +183,15 @@ function CountryButton({
       onClick={() => onSelect(active ? null : row.code)}
     >
       <span className={`rank r${Math.min(row.rank, 4)}`}>{String(row.rank).padStart(2, '0')}</span>
-      <span className="iso">{row.code}</span>
+      <Flag code={row.code} />
       <span className="who">
         <strong>{row.name}</strong>
         <i>
-          <b style={{ width: `${width}%`, background: ramp(Math.sqrt(row.value / leaderValue)) }} />
+          <b style={{ width: `${depth}%`, background: ramp(0.4 + presence(row.value, leaderValue) * 0.6) }} />
         </i>
       </span>
       <span className="val">
         <strong>{formatCompact(row.value)}</strong>
-        <small>{formatPct(row.share)}</small>
       </span>
     </button>
   );

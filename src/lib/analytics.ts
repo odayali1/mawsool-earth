@@ -1,5 +1,5 @@
 import type { PhaseFile } from '../phases/types';
-import { formatCompact, formatPct, joinNames } from './format';
+import { formatCompact, formatFull } from './format';
 import { regionOf, type RegionId } from './regions';
 
 export type CountryRow = {
@@ -14,6 +14,7 @@ export type CountryRow = {
 export type RegionSlice = {
   id: RegionId;
   value: number;
+  countries: number;
   share: number;
 };
 
@@ -95,13 +96,21 @@ export function analyze(phase: PhaseFile): PhaseStats {
     if (total > 0 && running >= total * 0.5) break;
   }
 
-  const regionTotals = new Map<RegionId, number>();
+  const regionTotals = new Map<RegionId, { value: number; countries: number }>();
   for (const row of locations) {
-    regionTotals.set(row.region, (regionTotals.get(row.region) ?? 0) + row.value);
+    const current = regionTotals.get(row.region) ?? { value: 0, countries: 0 };
+    current.value += row.value;
+    current.countries += 1;
+    regionTotals.set(row.region, current);
   }
   const regions: RegionSlice[] = [...regionTotals.entries()]
-    .map(([id, value]) => ({ id, value, share: total > 0 ? value / total : 0 }))
-    .sort((a, b) => b.value - a.value);
+    .map(([id, meta]) => ({
+      id,
+      value: meta.value,
+      countries: meta.countries,
+      share: total > 0 ? meta.value / total : 0,
+    }))
+    .sort((a, b) => b.countries - a.countries || b.value - a.value);
 
   return {
     total,
@@ -119,82 +128,21 @@ export function analyze(phase: PhaseFile): PhaseStats {
 }
 
 export function phaseInsights(stats: PhaseStats, noun: string): Insight[] {
-  const { locations, leader, total, halfCount, unknown, unknownRank } = stats;
-  const insights: Insight[] = [];
-  const nextThree = locations.slice(1, 4);
-  const nextThreeSum = nextThree.reduce((sum, row) => sum + row.value, 0);
-
-  if (nextThree.length === 3 && leader.value > nextThreeSum) {
-    insights.push({
+  const insights: Insight[] = [
+    {
       tone: 'lead',
-      text: sentence(
-        `${withArticle(leader.name)} alone outweighs ${joinNames(nextThree.map((row) => withArticle(row.name)))} combined.`,
-      ),
-    });
-  } else {
-    insights.push({
-      tone: 'lead',
-      text: sentence(
-        `${withArticle(leader.name)} leads with ${formatPct(leader.share)} of all ${noun} in this phase.`,
-      ),
-    });
-  }
-
-  if (halfCount > 1) {
-    const almost = locations.slice(0, halfCount - 1);
-    const tip = locations[halfCount - 1];
-    const almostShare = almost.reduce((sum, row) => sum + row.value, 0) / total;
+      text: `${formatFull(stats.total)} ${noun} across ${stats.locations.length} countries.`,
+    },
+    {
+      tone: 'body',
+      text: `The footprint covers ${stats.regions.length} regions.`,
+    },
+  ];
+  if (stats.unknown && stats.unknown.value > 0) {
     insights.push({
       tone: 'body',
-      text: `${sentence(`${joinNames(almost.map((row) => withArticle(row.name)))} hold ${formatPct(almostShare)}`)}. ${tip.name} is the country that carries this phase past halfway.`,
-    });
-  } else if (leader) {
-    insights.push({
-      tone: 'body',
-      text: sentence(`${withArticle(leader.name)} alone holds more than half of all ${noun} in this phase.`),
+      text: `${formatCompact(stats.unknown.value)} ${noun} have no country code yet. They stay inside the total.`,
     });
   }
-
-  if (unknown && unknownRank) {
-    const aheadOf = locations[unknownRank - 1];
-    const place = aheadOf
-      ? `they would rank ${ordinal(unknownRank)}, ahead of ${aheadOf.name}`
-      : `they would rank ${ordinal(unknownRank)}`;
-    insights.push({
-      tone: 'body',
-      text: `${formatCompact(unknown.value)} ${noun} have no country. Placed on this list, ${place}.`,
-    });
-  }
-
   return insights;
-}
-
-function withArticle(name: string) {
-  if (name.startsWith('United ')) return `the ${name}`;
-  return name;
-}
-
-function sentence(text: string) {
-  return text.charAt(0).toUpperCase() + text.slice(1);
-}
-
-function ordinal(value: number) {
-  const mod100 = value % 100;
-  if (mod100 >= 11 && mod100 <= 13) return `${value}th`;
-  switch (value % 10) {
-    case 1:
-      return `${value}st`;
-    case 2:
-      return `${value}nd`;
-    case 3:
-      return `${value}rd`;
-    default:
-      return `${value}th`;
-  }
-}
-
-export function regionShareOf(stats: PhaseStats, row: CountryRow) {
-  const slice = stats.regions.find((region) => region.id === row.region);
-  if (!slice || slice.value <= 0) return 0;
-  return row.value / slice.value;
 }

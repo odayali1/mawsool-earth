@@ -1,8 +1,10 @@
-import { phaseInsights, regionShareOf, type CountryRow, type PhaseStats } from '../lib/analytics';
-import { formatCompact, formatFull, formatPct, formatTimes } from '../lib/format';
+import { phaseInsights, type CountryRow, type PhaseStats } from '../lib/analytics';
+import { formatCompact, formatFull } from '../lib/format';
 import type { PlacePoint } from '../lib/land';
 import { REGION_COLOR, type RegionId } from '../lib/regions';
 import type { PhaseFile } from '../phases/types';
+import { Flag } from './Flag';
+import { MailboxMix } from './MailboxMix';
 
 type Props = {
   phase: PhaseFile;
@@ -40,12 +42,10 @@ export function StoryPanel({ phase, stats, selected, region, places, onSelect, o
 
   return (
     <section className="panel story" aria-label="Phase story">
-      <p className="eyebrow">The shape of this phase</p>
+      <p className="eyebrow">Global footprint</p>
       <div className="half">
-        <span>{stats.halfCount}</span>
-        <p>
-          {stats.halfCount === 1 ? 'country holds' : 'countries hold'} half of all {phase.noun} in this phase.
-        </p>
+        <span>{stats.locations.length}</span>
+        <p>countries carrying {phase.noun}.</p>
       </div>
       {lead && <p className="lead-copy">{lead.text}</p>}
       <div className="body-copy">
@@ -62,7 +62,7 @@ export function StoryPanel({ phase, stats, selected, region, places, onSelect, o
         </div>
       </div>
 
-      <h2>Where they sit</h2>
+      <h2>Coverage</h2>
       <div className="region-bar">
         {stats.regions.map((slice) => (
           <button
@@ -70,7 +70,7 @@ export function StoryPanel({ phase, stats, selected, region, places, onSelect, o
             type="button"
             tabIndex={-1}
             aria-hidden="true"
-            style={{ flexGrow: slice.value, background: REGION_COLOR[slice.id] }}
+            style={{ flexGrow: slice.countries, background: REGION_COLOR[slice.id] }}
             onClick={() => onRegion(region === slice.id ? null : slice.id)}
           />
         ))}
@@ -85,8 +85,13 @@ export function StoryPanel({ phase, stats, selected, region, places, onSelect, o
               onClick={() => onRegion(region === slice.id ? null : slice.id)}
             >
               <i style={{ background: REGION_COLOR[slice.id] }} />
-              <span>{slice.id}</span>
-              <b>{formatPct(slice.share)}</b>
+              <span>
+                {slice.id}
+                <em>
+                  {slice.countries} {slice.countries === 1 ? 'country' : 'countries'}
+                </em>
+              </span>
+              <b>{formatCompact(slice.value)}</b>
             </button>
           </li>
         ))}
@@ -116,89 +121,55 @@ function Dossier({
 }) {
   const above = row.rank > 1 ? stats.locations[row.rank - 2] : null;
   const below = stats.locations[row.rank] ?? null;
-  const neighbor =
-    row.code === 'unknown'
-      ? null
-      : row.rank === 1 && below
-        ? `${formatCompact(row.value - below.value)} ahead of ${below.name}.`
-        : above
-          ? `${formatCompact(above.value - row.value)} behind ${above.name}.`
-          : null;
-
   return (
     <div className="dossier">
       <button type="button" className="back" onClick={onBack}>
         All countries
       </button>
-      <p className="eyebrow">{row.code === 'unknown' ? 'Off the map' : row.region}</p>
       <div className="dossier-title">
-        {row.code !== 'unknown' && <span className="iso lg">{row.code}</span>}
-        <h2>{row.name}</h2>
+        {row.code !== 'unknown' && <Flag code={row.code} className="lg" />}
+        <div>
+          <p className="eyebrow">{row.code === 'unknown' ? 'Off the map' : row.region}</p>
+          <h2>{row.name}</h2>
+        </div>
       </div>
       <p className="hero-num">{formatFull(row.value)}</p>
       <p className="hero-sub">{phase.noun}</p>
+      {row.code !== 'unknown' && (
+        <p className="hint">
+          Country {row.rank} of {stats.locations.length}
+        </p>
+      )}
+      {phase.id === 'personal-email' && (
+        <MailboxMix variant="list" heading="Mailbox mix" stats={stats} focus={row.code} />
+      )}
 
       {row.code === 'unknown' ? (
         <div className="body-copy">
-          <p>
-            These records have no country code in {phase.source}, so they stay in the total and off the planet.
-            {stats.unknownRank ? ` Placed among the countries, they would rank ${stats.unknownRank}.` : ''}
-          </p>
+          <p>These records have no country code in {phase.source}, so they stay in the total and off the planet.</p>
         </div>
       ) : (
         <>
-          <div className="share-row">
-            <div
-              className="ring"
-              style={{
-                background: `conic-gradient(#00d2ff ${Math.max(0, Math.min(1, row.share)) * 360}deg, rgba(255,255,255,0.08) 0deg)`,
-              }}
-            >
-              <div>
-                <strong>{formatPct(row.share)}</strong>
-                <small>of phase</small>
-              </div>
-            </div>
-            <div className="facts">
-              <article>
-                <small>Rank</small>
-                <strong>#{row.rank}</strong>
-                <em>of {stats.locations.length}</em>
-              </article>
-              <article>
-                <small>Versus median</small>
-                <strong>{formatTimes(stats.median > 0 ? row.value / stats.median : 0)}</strong>
-                <em>the middle country</em>
-              </article>
-              <article>
-                <small>Inside {row.region}</small>
-                <strong>{formatPct(regionShareOf(stats, row))}</strong>
-                <em>of that region</em>
-              </article>
-              <article>
-                <small>Mapped share</small>
-                <strong>{formatPct(stats.mappedTotal > 0 ? row.value / stats.mappedTotal : 0)}</strong>
-                <em>excluding unmapped</em>
-              </article>
-            </div>
-          </div>
-          {neighbor && <p className="lead-copy slim">{neighbor}</p>}
           {place && !place.polygon && (
-            <p className="hint">
-              Shown as a beacon. This place is smaller than the country shapes on the base map.
-            </p>
+            <p className="hint">Shown as a beacon. This place is smaller than the country shapes on the base map.</p>
           )}
           {above && (
             <button type="button" className="jump" onClick={() => onSelect(above.code)}>
-              <small>Country above</small>
-              <strong>{above.name}</strong>
+              <Flag code={above.code} />
+              <span>
+                <small>Country above</small>
+                <strong>{above.name}</strong>
+              </span>
               <b>{formatCompact(above.value)}</b>
             </button>
           )}
           {below && row.rank > 0 && (
             <button type="button" className="jump" onClick={() => onSelect(below.code)}>
-              <small>Country below</small>
-              <strong>{below.name}</strong>
+              <Flag code={below.code} />
+              <span>
+                <small>Country below</small>
+                <strong>{below.name}</strong>
+              </span>
               <b>{formatCompact(below.value)}</b>
             </button>
           )}

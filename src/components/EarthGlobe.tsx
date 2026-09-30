@@ -3,6 +3,7 @@ import type { GlobeMethods } from 'react-globe.gl';
 import type { CountryRow } from '../lib/analytics';
 import { asset } from '../lib/asset';
 import { capColor, extrusion, sideColor, strokeColor, type LandTone } from '../lib/color';
+import { flagUrl } from '../lib/flags';
 import { escapeHtml, formatFull } from '../lib/format';
 import type { LandFeature, PlacePoint } from '../lib/land';
 import type { RegionId } from '../lib/regions';
@@ -275,7 +276,9 @@ export function EarthGlobe({
             const marker = point as Marker;
             const el = document.createElement('div');
             el.className = 'globe-label';
-            el.innerHTML = `<em>${escapeHtml(marker.code)}</em><strong>${escapeHtml(marker.name)}</strong>`;
+            const src = flagUrl(marker.code);
+            const flag = src ? `<img src="${src}" alt="" />` : '';
+            el.innerHTML = `${flag}<strong>${escapeHtml(marker.name)}</strong>`;
             return el;
           }}
           onGlobeReady={() => {

@@ -1,0 +1,4 @@
+# Coolify's Nixpacks image ships Node 22.11. Vite 8 needs Node >= 22.12
+# so the ARM build can install its native compiler.
+[phases.build]
+cmds = ["bash scripts/nixpacks-build.sh"]

@@ -9,6 +9,13 @@ export function formatCompact(value: number) {
   }).format(value);
 }
 
+/** Percent points already scaled, such as 42.87 → "42.87%". */
+export function formatPoints(points: number) {
+  if (!Number.isFinite(points) || points <= 0) return '0%';
+  if (points < 0.005) return '<0.01%';
+  return `${points.toFixed(2)}%`;
+}
+
 export function formatPct(ratio: number) {
   if (!Number.isFinite(ratio) || ratio <= 0) return '0%';
   const percent = ratio * 100;

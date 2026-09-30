@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { CommandDeck } from './components/CommandDeck';
 import { EarthGlobe, type EarthGlobeHandle } from './components/EarthGlobe';
+import { MailboxMix } from './components/MailboxMix';
 import { StoryPanel } from './components/StoryPanel';
 import { TopBar } from './components/TopBar';
 import { analyze } from './lib/analytics';
@@ -121,6 +122,11 @@ export function App() {
     return <p className="fatal">No analytics phase is loaded yet.</p>;
   }
 
+  const picked =
+    selected === 'unknown'
+      ? stats.unknown
+      : (stats.locations.find((row) => row.code === selected) ?? null);
+
   return (
     <div className="app">
       <div className="globe-layer">
@@ -180,6 +186,15 @@ export function App() {
             onRegion={setRegion}
           />
         </div>
+        {phase.id === 'personal-email' && (
+          <MailboxMix
+            variant="dock"
+            stats={stats}
+            focus={picked?.code ?? null}
+            heading={picked?.name ?? 'Mailbox mix'}
+            flagCode={picked && picked.code !== 'unknown' ? picked.code : undefined}
+          />
+        )}
       </div>
       {bootMounted && (
         <div className={booted ? 'boot is-done' : 'boot'} role="status">

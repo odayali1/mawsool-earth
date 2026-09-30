@@ -219,6 +219,12 @@ button { cursor: pointer; }
   font-variant-numeric: tabular-nums;
   letter-spacing: -0.03em;
 }
+.stat-grid .stat-name {
+  font-size: 15px;
+  line-height: 1.2;
+  font-variant-numeric: normal;
+  letter-spacing: -0.03em;
+}
 
 .search {
   display: flex;
@@ -302,12 +308,29 @@ button { cursor: pointer; }
 .row {
   width: 100%;
   display: grid;
-  grid-template-columns: 28px 36px 1fr auto;
+  grid-template-columns: 28px 28px 1fr auto;
   gap: 8px;
   align-items: center;
   text-align: left;
   border-radius: 14px;
   padding: 8px;
+}
+.flag {
+  width: 22px;
+  height: 16px;
+  object-fit: cover;
+  border-radius: 2px;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.28);
+  display: block;
+}
+.flag.lg {
+  width: 64px;
+  height: 44px;
+  border-radius: 6px;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(255, 255, 255, 0.28);
+}
+.flag-empty {
+  background: rgba(255, 255, 255, 0.08);
 }
 .row.is-hot { background: rgba(255, 255, 255, 0.05); }
 .rank {
@@ -396,6 +419,15 @@ button { cursor: pointer; }
   text-align: left;
 }
 .region-list i { width: 10px; height: 10px; border-radius: 50%; }
+.region-list em {
+  display: block;
+  margin-top: 2px;
+  color: var(--faint);
+  font-style: normal;
+  font-size: 11px;
+  letter-spacing: 0;
+  text-transform: none;
+}
 .region-list b { font-variant-numeric: tabular-nums; font-weight: 550; }
 .source { display: block; margin: 16px 0 0; line-height: 1.45; }
 
@@ -438,11 +470,112 @@ button { cursor: pointer; }
   border-radius: 14px;
   padding: 10px 12px;
   display: grid;
-  grid-template-columns: 1fr auto;
+  grid-template-columns: auto 1fr auto;
+  gap: 10px;
+  align-items: center;
   text-align: left;
 }
-.jump small { grid-column: 1 / -1; }
+.jump span { min-width: 0; }
+.jump span strong { display: block; }
 .jump b { font-variant-numeric: tabular-nums; }
+.dossier-title { align-items: center; }
+.globe-label img {
+  width: 18px;
+  height: 13px;
+  object-fit: cover;
+  border-radius: 2px;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.45);
+}
+.mailbox-dock, .mailbox-list { pointer-events: auto; }
+.mailbox-dock {
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 12px 14px 10px;
+  background: rgba(7, 9, 18, 0.72);
+  backdrop-filter: blur(18px) saturate(1.35);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+.mailbox-top, .mailbox-title, .mailbox-personal {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.mailbox-top { justify-content: space-between; margin-bottom: 10px; }
+.mailbox-title .eyebrow, .mailbox-list .eyebrow { margin: 0; }
+.mailbox-personal { margin: 0; }
+.mailbox-personal strong {
+  font-size: 28px;
+  font-weight: 650;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  background: linear-gradient(100deg, #ffffff 10%, #c8f6ff 55%, #00d2ff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.mailbox-personal span { color: var(--muted); font-size: 13px; }
+.mix-bar {
+  display: flex;
+  gap: 3px;
+  height: 8px;
+  margin-bottom: 10px;
+}
+.mix-bar i {
+  display: block;
+  height: 100%;
+  min-width: 3px;
+  border-radius: 99px;
+}
+.mailbox-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.mailbox-chips li {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 8px 4px 5px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.045);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+.mailbox-chips span, .mailbox-list span { color: var(--muted); font-size: 12px; }
+.mailbox-chips b, .mailbox-list b {
+  font-variant-numeric: tabular-nums;
+  font-size: 12px;
+  color: #c8f6ff;
+}
+.mailbox-chips li.is-lead b { color: white; font-size: 13px; }
+.mail-icon { width: 16px; height: 16px; display: block; flex: none; }
+.mailbox-dock .hint, .mailbox-list .hint { margin: 8px 0 0; font-size: 12px; }
+
+.mailbox-list { margin-top: 16px; }
+.mailbox-list .mailbox-personal { margin-top: 6px; }
+.mailbox-list .mailbox-personal strong { font-size: 32px; }
+.mailbox-list ul {
+  list-style: none;
+  margin: 12px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 7px;
+}
+.mailbox-list li {
+  display: grid;
+  grid-template-columns: 16px minmax(72px, 92px) 1fr auto;
+  gap: 8px;
+  align-items: center;
+}
+.mailbox-list li i {
+  display: block;
+  height: 4px;
+  border-radius: 99px;
+  justify-self: stretch;
+}
 
 .globe-label {
   pointer-events: none;
@@ -529,6 +662,12 @@ button:focus-visible, input:focus-visible {
 
 @media (min-width: 1100px) {
   body { overflow: hidden; }
+  .mailbox-dock {
+    position: absolute;
+    left: calc(min(392px, 32vw) + 28px);
+    right: calc(min(392px, 32vw) + 28px);
+    bottom: 16px;
+  }
   .vignette {
     background:
       linear-gradient(90deg, rgba(4, 5, 12, 0.82), rgba(4, 5, 12, 0.08) 27%, rgba(4, 5, 12, 0) 40%, rgba(4, 5, 12, 0) 60%, rgba(4, 5, 12, 0.08) 73%, rgba(4, 5, 12, 0.82)),
