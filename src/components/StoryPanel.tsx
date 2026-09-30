@@ -118,25 +118,198 @@ export function StoryPanel({ phase, stats, selected, region, places, onSelect, o
   );
 }
 
+const FIELD_GROUP: Record<string, string> = {
+  public_id: 'Identity',
+  full_name: 'Identity',
+  urn: 'Identity',
+  pronoun: 'Identity',
+  logo_url: 'Identity',
+  public_profile_url: 'Identity',
+  connections_count: 'Presence',
+  followers_count: 'Presence',
+  last_verified_at: 'Presence',
+  location: 'Presence',
+  location_country: 'Presence',
+  headline: 'Presence',
+  job_function: 'Work',
+  seniority: 'Work',
+  industry: 'Work',
+  experience: 'Work',
+  summary: 'Work',
+  ingestion_tag: 'Work',
+  profile_embedding: 'Work',
+  education: 'Record',
+  skills: 'Record',
+  certifications: 'Record',
+  courses: 'Record',
+  languages: 'Record',
+  badges: 'Record',
+  volunteer_experiences: 'Record',
+  projects: 'Record',
+  honors: 'Record',
+  organizations: 'Record',
+  publications: 'Record',
+  patents: 'Record',
+};
+
+const GROUP_ORDER = ['Identity', 'Presence', 'Work', 'Record'];
+
 function FillCounts({ profiles }: { profiles: number }) {
   const rows = PROFILE_FIELDS.map((field, index) => ({
     ...field,
     index,
+    group: FIELD_GROUP[field.key] ?? 'Record',
     count: filledCount(profiles, field.bps),
-  })).sort((a, b) => b.count - a.count || a.index - b.index);
+  }));
 
   return (
-    <ol className="fill-list">
-      {rows.map((field) => (
-        <li key={field.key}>
-          <span>
-            {field.label}
-            {'note' in field && field.note ? <em>{field.note}</em> : null}
-          </span>
-          <b>{formatFull(field.count)}</b>
-        </li>
-      ))}
-    </ol>
+    <div className="profile-card">
+      {GROUP_ORDER.map((group) => {
+        const items = rows
+          .filter((field) => field.group === group)
+          .sort((a, b) => b.count - a.count || a.index - b.index);
+        return (
+          <section key={group} className="fill-group">
+            <h3>{group}</h3>
+            <ol className="fill-list">
+              {items.map((field) => (
+                <li key={field.key}>
+                  <i className="field-icon" aria-hidden="true">
+                    <FieldIcon name={field.key} />
+                  </i>
+                  <span>
+                    {field.label}
+                    {'note' in field && field.note ? <em>{field.note}</em> : null}
+                    <b style={{ width: `${profiles > 0 ? (field.count / profiles) * 100 : 0}%` }} />
+                  </span>
+                  <strong>{formatFull(field.count)}</strong>
+                </li>
+              ))}
+            </ol>
+          </section>
+        );
+      })}
+    </div>
+  );
+}
+
+function FieldIcon({ name }: { name: string }) {
+  const common = { fill: 'none', stroke: 'currentColor', strokeWidth: 1.8, strokeLinecap: 'round' as const, strokeLinejoin: 'round' as const };
+  if (name === 'full_name' || name === 'pronoun') {
+    return (
+      <svg viewBox="0 0 24 24">
+        <circle cx="12" cy="8" r="3" {...common} />
+        <path d="M6 19c1.2-3 3.2-4.4 6-4.4S16.8 16 18 19" {...common} />
+      </svg>
+    );
+  }
+  if (name === 'public_id') {
+    return (
+      <svg viewBox="0 0 24 24">
+        <rect x="4" y="6" width="16" height="12" rx="2" {...common} />
+        <path d="M8 10h3M8 14h8" {...common} />
+      </svg>
+    );
+  }
+  if (name === 'urn' || name === 'public_profile_url') {
+    return (
+      <svg viewBox="0 0 24 24">
+        <path d="M10 13a5 5 0 0 0 7.1.1l2-2a5 5 0 0 0-7.1-7.1l-1.1 1.1" {...common} />
+        <path d="M14 11a5 5 0 0 0-7.1-.1l-2 2a5 5 0 0 0 7.1 7.1l1.1-1.1" {...common} />
+      </svg>
+    );
+  }
+  if (name === 'logo_url') {
+    return (
+      <svg viewBox="0 0 24 24">
+        <rect x="4" y="5" width="16" height="14" rx="2" {...common} />
+        <circle cx="9" cy="10" r="1.4" {...common} />
+        <path d="M7 16l3.2-3.2L13 15.5 15.2 13 18 16" {...common} />
+      </svg>
+    );
+  }
+  if (name === 'connections_count' || name === 'followers_count' || name === 'organizations') {
+    return (
+      <svg viewBox="0 0 24 24">
+        <circle cx="8" cy="9" r="2.2" {...common} />
+        <circle cx="16" cy="9" r="2.2" {...common} />
+        <path d="M4.8 17.5c.7-2 2.2-3 4.2-3s3.5 1 4.2 3M12.8 17.5c.7-2 2.2-3 4.2-3s3.5 1 4.2 3" {...common} />
+      </svg>
+    );
+  }
+  if (name === 'last_verified_at' || name === 'badges' || name === 'certifications' || name === 'honors') {
+    return (
+      <svg viewBox="0 0 24 24">
+        <circle cx="12" cy="10" r="5" {...common} />
+        <path d="M9.5 14.5 8.5 20l3.5-2 3.5 2-1-5.5" {...common} />
+      </svg>
+    );
+  }
+  if (name === 'location' || name === 'location_country') {
+    return (
+      <svg viewBox="0 0 24 24">
+        <path d="M12 21s6-5.2 6-10a6 6 0 1 0-12 0c0 4.8 6 10 6 10Z" {...common} />
+        <circle cx="12" cy="11" r="1.8" {...common} />
+      </svg>
+    );
+  }
+  if (name === 'headline' || name === 'summary' || name === 'publications') {
+    return (
+      <svg viewBox="0 0 24 24">
+        <path d="M7 4.5h8l3 3V19a1.5 1.5 0 0 1-1.5 1.5h-9.5A1.5 1.5 0 0 1 5.5 19V6A1.5 1.5 0 0 1 7 4.5Z" {...common} />
+        <path d="M15 4.8V8h3.2M8 12h8M8 16h6" {...common} />
+      </svg>
+    );
+  }
+  if (name === 'job_function' || name === 'experience' || name === 'industry') {
+    return (
+      <svg viewBox="0 0 24 24">
+        <rect x="3.5" y="8" width="17" height="11" rx="1.6" {...common} />
+        <path d="M9 8V6.4A1.4 1.4 0 0 1 10.4 5h3.2A1.4 1.4 0 0 1 15 6.4V8M3.5 12.5h17" {...common} />
+      </svg>
+    );
+  }
+  if (name === 'seniority' || name === 'skills' || name === 'profile_embedding') {
+    return (
+      <svg viewBox="0 0 24 24">
+        <path d="M12 3.5 14.2 9H20l-4.6 3.4L17.2 18 12 14.8 6.8 18l1.8-5.6L4 9h5.8L12 3.5Z" {...common} />
+      </svg>
+    );
+  }
+  if (name === 'ingestion_tag' || name === 'languages') {
+    return (
+      <svg viewBox="0 0 24 24">
+        <path d="M4 12a8 8 0 1 0 16 0A8 8 0 0 0 4 12Z" {...common} />
+        <path d="M4 12h16M12 4c2.2 2.4 3.3 5.1 3.3 8S14.2 17.6 12 20c-2.2-2.4-3.3-5.1-3.3-8S9.8 6.4 12 4Z" {...common} />
+      </svg>
+    );
+  }
+  if (name === 'education' || name === 'courses') {
+    return (
+      <svg viewBox="0 0 24 24">
+        <path d="M3 10 12 6l9 4-9 4-9-4Z" {...common} />
+        <path d="M7 12.2V16c1.6 1.3 3.2 2 5 2s3.4-.7 5-2v-3.8" {...common} />
+      </svg>
+    );
+  }
+  if (name === 'volunteer_experiences') {
+    return (
+      <svg viewBox="0 0 24 24">
+        <path d="M12 19s-6.5-3.8-6.5-8A3.5 3.5 0 0 1 12 8a3.5 3.5 0 0 1 6.5 3c0 4.2-6.5 8-6.5 8Z" {...common} />
+      </svg>
+    );
+  }
+  if (name === 'projects') {
+    return (
+      <svg viewBox="0 0 24 24">
+        <path d="M4 8.5h6l2 2H20V18a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 4 18V8.5Z" {...common} />
+      </svg>
+    );
+  }
+  return (
+    <svg viewBox="0 0 24 24">
+      <path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3 11c.4.5.7 1 .8 1.6h4.4c.1-.6.4-1.1.8-1.6A6 6 0 0 0 12 3Z" {...common} />
+    </svg>
   );
 }
 
@@ -158,7 +331,7 @@ function Dossier({
   const above = row.rank > 1 ? stats.locations[row.rank - 2] : null;
   const below = stats.locations[row.rank] ?? null;
   return (
-    <div className="dossier">
+    <div className={phase.id === 'profile-graph' ? 'dossier is-profile' : 'dossier'}>
       <button type="button" className="back" onClick={onBack}>
         All countries
       </button>
@@ -182,12 +355,7 @@ function Dossier({
       {phase.id === 'personal-email' && (
         <MailboxMix variant="list" heading="Mailbox mix" stats={stats} focus={row.code} />
       )}
-      {phase.id === 'profile-graph' && (
-        <>
-          <h3 className="fill-heading">Filled in this country</h3>
-          <FillCounts profiles={row.value} />
-        </>
-      )}
+      {phase.id === 'profile-graph' && <FillCounts profiles={row.value} />}
 
       {row.code === 'unknown' ? (
         <div className="body-copy">

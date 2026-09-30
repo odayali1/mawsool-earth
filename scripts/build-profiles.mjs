@@ -301,35 +301,49 @@ const originalSum = listed.reduce((sum, row) => sum + row.value, 0);
 const us = listed.find((row) => row.code === 'US');
 if (!us || us.value !== 196_045_734) throw new Error(`US listed count changed: ${us?.value}`);
 
-const weights = listed
-  .filter((row) => row.code !== 'UNKNOWN' && row.code !== 'US')
-  .map((row) => ({ code: row.code, weight: row.value }));
-const weightSum = weights.reduce((sum, row) => sum + row.weight, 0);
-const pool = BigInt(US_MISTAKE);
-const weightTotal = BigInt(weightSum);
-const shares = weights.map((row) => {
-  const numerator = pool * BigInt(row.weight);
-  const base = Number(numerator / weightTotal);
-  const remainder = numerator % weightTotal;
-  return { ...row, base, remainder };
-});
-let leftover = US_MISTAKE - shares.reduce((sum, row) => sum + row.base, 0);
-shares.sort((a, b) => {
-  if (a.remainder > b.remainder) return -1;
-  if (a.remainder < b.remainder) return 1;
-  return b.weight - a.weight || a.code.localeCompare(b.code);
-});
-for (let index = 0; index < leftover; index += 1) shares[index].base += 1;
-if (shares.reduce((sum, row) => sum + row.base, 0) !== US_MISTAKE) {
-  throw new Error('Redistribution does not sum to the miscounted block');
+function allocate(pool, weights) {
+  const poolBI = BigInt(pool);
+  const weightTotal = weights.reduce((sum, row) => sum + BigInt(row.weight), 0n);
+  const shares = weights.map((row) => {
+    const numerator = poolBI * BigInt(row.weight);
+    return { ...row, base: Number(numerator / weightTotal), remainder: numerator % weightTotal };
+  });
+  let leftover = pool - shares.reduce((sum, row) => sum + row.base, 0);
+  shares.sort((a, b) => {
+    if (a.remainder > b.remainder) return -1;
+    if (a.remainder < b.remainder) return 1;
+    return b.weight - a.weight || a.code.localeCompare(b.code);
+  });
+  for (let index = 0; index < leftover; index += 1) shares[index].base += 1;
+  if (shares.reduce((sum, row) => sum + row.base, 0) !== pool) {
+    throw new Error('Redistribution does not sum to the miscounted block');
+  }
+  return new Map(shares.map((row) => [row.code, row.base]));
 }
 
-const added = new Map(shares.map((row) => [row.code, row.base]));
+const located = listed
+  .filter((row) => row.code !== 'UNKNOWN')
+  .map((row) => ({ code: row.code, weight: row.value }));
+const proportional = allocate(US_MISTAKE, located);
+const usNatural = proportional.get('US');
+if (usNatural !== 23_864_104) throw new Error(`US size share changed: ${usNatural}`);
+
+const US_KEPT = 5_000_000;
+const released = usNatural - US_KEPT;
+const others = located.filter((row) => row.code !== 'US');
+const releasedShares = allocate(released, others);
+const added = new Map(proportional);
+added.set('US', US_KEPT);
+for (const [code, extra] of releasedShares) added.set(code, (added.get(code) ?? 0) + extra);
+if ([...added.values()].reduce((sum, value) => sum + value, 0) !== US_MISTAKE) {
+  throw new Error('Country additions no longer equal 103,958,989');
+}
+
 const names = new Intl.DisplayNames(['en'], { type: 'region' });
 const records = listed.map((row) => {
   const extra = added.get(row.code) ?? 0;
   const value = row.value + extra;
-  if (row.code === 'US' && value !== row.value) throw new Error('US must stay at the listed count');
+  if (row.code === 'US' && value !== 201_045_734) throw new Error(`US final ${value}`);
   const code = row.code === 'UNKNOWN' ? 'unknown' : row.code;
   const name = NAMES[row.code] ?? names.of(row.code) ?? row.code;
   return { code, name, value };
@@ -351,7 +365,7 @@ const phase = {
   singular: 'profile',
   source: 'location country counts',
   summary:
-    'Profiles by country. The United States stays at 196,045,734. The 103,958,989 records that had been counted as one country are divided across the other countries in proportion to each country size.',
+    'Profiles by country. Of the 23,864,104 size share for the United States, 5,000,000 stays there and 18,864,104 is divided across the other countries. The United States total is 201,045,734.',
   records: records.sort((a, b) => b.value - a.value),
 };
 

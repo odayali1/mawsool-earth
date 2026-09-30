@@ -7,32 +7,32 @@
   "noun": "profiles",
   "singular": "profile",
   "source": "location country counts",
-  "summary": "Profiles by country. The United States stays at 196,045,734. The 103,958,989 records that had been counted as one country are divided across the other countries in proportion to each country size.",
+  "summary": "Profiles by country. Of the 23,864,104 size share for the United States, 5,000,000 stays there and 18,864,104 is divided across the other countries. The United States total is 201,045,734.",
   "records": [
     {
       "code": "US",
       "name": "United States",
-      "value": 196045734
+      "value": 201045734
     },
     {
       "code": "IN",
       "name": "India",
-      "value": 116156862
+      "value": 115394624
     },
     {
       "code": "BR",
       "name": "Brazil",
-      "value": 66061246
+      "value": 65627743
     },
     {
       "code": "GB",
       "name": "United Kingdom",
-      "value": 40411194
+      "value": 40146011
     },
     {
       "code": "CN",
       "name": "China",
-      "value": 38318621
+      "value": 38067169
     },
     {
       "code": "unknown",
@@ -42,1272 +42,1272 @@
     {
       "code": "FR",
       "name": "France",
-      "value": 32435030
+      "value": 32222186
     },
     {
       "code": "CA",
       "name": "Canada",
-      "value": 25244608
+      "value": 25078949
     },
     {
       "code": "ID",
       "name": "Indonesia",
-      "value": 25147766
+      "value": 24982743
     },
     {
       "code": "MX",
       "name": "Mexico",
-      "value": 20718369
+      "value": 20582411
     },
     {
       "code": "IT",
       "name": "Italy",
-      "value": 20572652
+      "value": 20437652
     },
     {
       "code": "ES",
       "name": "Spain",
-      "value": 19046904
+      "value": 18921916
     },
     {
       "code": "DE",
       "name": "Germany",
-      "value": 18216081
+      "value": 18096545
     },
     {
       "code": "AU",
       "name": "Australia",
-      "value": 15819476
+      "value": 15715667
     },
     {
       "code": "PH",
       "name": "Philippines",
-      "value": 13518383
+      "value": 13429674
     },
     {
       "code": "TR",
       "name": "Türkiye",
-      "value": 13307175
+      "value": 13219852
     },
     {
       "code": "ZA",
       "name": "South Africa",
-      "value": 12388757
+      "value": 12307460
     },
     {
       "code": "CO",
       "name": "Colombia",
-      "value": 12254793
+      "value": 12174375
     },
     {
       "code": "NL",
       "name": "Netherlands",
-      "value": 12193614
+      "value": 12113597
     },
     {
       "code": "AR",
       "name": "Argentina",
-      "value": 12119744
+      "value": 12040212
     },
     {
       "code": "PK",
       "name": "Pakistan",
-      "value": 9846939
+      "value": 9782322
     },
     {
       "code": "SA",
       "name": "Saudi Arabia",
-      "value": 8409640
+      "value": 8354454
     },
     {
       "code": "AE",
       "name": "United Arab Emirates",
-      "value": 8301023
+      "value": 8246550
     },
     {
       "code": "NG",
       "name": "Nigeria",
-      "value": 8164652
+      "value": 8111074
     },
     {
       "code": "EG",
       "name": "Egypt",
-      "value": 7956033
+      "value": 7903824
     },
     {
       "code": "PE",
       "name": "Peru",
-      "value": 7942368
+      "value": 7890249
     },
     {
       "code": "MY",
       "name": "Malaysia",
-      "value": 7715338
+      "value": 7664709
     },
     {
       "code": "CL",
       "name": "Chile",
-      "value": 7483448
+      "value": 7434341
     },
     {
       "code": "RU",
       "name": "Russia",
-      "value": 7171432
+      "value": 7124372
     },
     {
       "code": "PL",
       "name": "Poland",
-      "value": 6394468
+      "value": 6352506
     },
     {
       "code": "BE",
       "name": "Belgium",
-      "value": 5477817
+      "value": 5441871
     },
     {
       "code": "SE",
       "name": "Sweden",
-      "value": 5409932
+      "value": 5374431
     },
     {
       "code": "BD",
       "name": "Bangladesh",
-      "value": 4743924
+      "value": 4712793
     },
     {
       "code": "CH",
       "name": "Switzerland",
-      "value": 4703695
+      "value": 4672828
     },
     {
       "code": "PT",
       "name": "Portugal",
-      "value": 4577130
+      "value": 4547095
     },
     {
       "code": "VN",
       "name": "Vietnam",
-      "value": 4159335
+      "value": 4132041
     },
     {
       "code": "KE",
       "name": "Kenya",
-      "value": 4066334
+      "value": 4039651
     },
     {
       "code": "MA",
       "name": "Morocco",
-      "value": 4009612
+      "value": 3983300
     },
     {
       "code": "SG",
       "name": "Singapore",
-      "value": 3998086
+      "value": 3971850
     },
     {
       "code": "EC",
       "name": "Ecuador",
-      "value": 3915592
+      "value": 3889897
     },
     {
       "code": "IR",
       "name": "Iran",
-      "value": 3870620
+      "value": 3845220
     },
     {
       "code": "RO",
       "name": "Romania",
-      "value": 3810247
+      "value": 3785243
     },
     {
       "code": "JP",
       "name": "Japan",
-      "value": 3808196
+      "value": 3783206
     },
     {
       "code": "VE",
       "name": "Venezuela",
-      "value": 3782199
+      "value": 3757380
     },
     {
       "code": "TH",
       "name": "Thailand",
-      "value": 3603824
+      "value": 3580175
     },
     {
       "code": "KR",
       "name": "South Korea",
-      "value": 3555826
+      "value": 3532492
     },
     {
       "code": "UA",
       "name": "Ukraine",
-      "value": 3533300
+      "value": 3510115
     },
     {
       "code": "DK",
       "name": "Denmark",
-      "value": 3496083
+      "value": 3473140
     },
     {
       "code": "IE",
       "name": "Ireland",
-      "value": 3042687
+      "value": 3022720
     },
     {
       "code": "TW",
       "name": "Taiwan",
-      "value": 3019299
+      "value": 2999485
     },
     {
       "code": "DZ",
       "name": "Algeria",
-      "value": 2987805
+      "value": 2968198
     },
     {
       "code": "NZ",
       "name": "New Zealand",
-      "value": 2832641
+      "value": 2814053
     },
     {
       "code": "HK",
       "name": "Hong Kong SAR China",
-      "value": 2747199
+      "value": 2729172
     },
     {
       "code": "NO",
       "name": "Norway",
-      "value": 2721272
+      "value": 2703415
     },
     {
       "code": "CZ",
       "name": "Czechia",
-      "value": 2430738
+      "value": 2414788
     },
     {
       "code": "IL",
       "name": "Israel",
-      "value": 2417295
+      "value": 2401432
     },
     {
       "code": "GR",
       "name": "Greece",
-      "value": 2360084
+      "value": 2344597
     },
     {
       "code": "AT",
       "name": "Austria",
-      "value": 2334679
+      "value": 2319359
     },
     {
       "code": "GH",
       "name": "Ghana",
-      "value": 2224889
+      "value": 2210289
     },
     {
       "code": "LK",
       "name": "Sri Lanka",
-      "value": 2011846
+      "value": 1998644
     },
     {
       "code": "FI",
       "name": "Finland",
-      "value": 1908120
+      "value": 1895598
     },
     {
       "code": "TN",
       "name": "Tunisia",
-      "value": 1686316
+      "value": 1675250
     },
     {
       "code": "CR",
       "name": "Costa Rica",
-      "value": 1564085
+      "value": 1553821
     },
     {
       "code": "HU",
       "name": "Hungary",
-      "value": 1517239
+      "value": 1507284
     },
     {
       "code": "DO",
       "name": "Dominican Republic",
-      "value": 1461240
+      "value": 1451651
     },
     {
       "code": "GT",
       "name": "Guatemala",
-      "value": 1280697
+      "value": 1272292
     },
     {
       "code": "QA",
       "name": "Qatar",
-      "value": 1274174
+      "value": 1265813
     },
     {
       "code": "JO",
       "name": "Jordan",
-      "value": 1257246
+      "value": 1248996
     },
     {
       "code": "NP",
       "name": "Nepal",
-      "value": 1256482
+      "value": 1248237
     },
     {
       "code": "RS",
       "name": "Serbia",
-      "value": 1242803
+      "value": 1234647
     },
     {
       "code": "CI",
       "name": "Côte d'Ivoire",
-      "value": 1225010
+      "value": 1216972
     },
     {
       "code": "BO",
       "name": "Bolivia",
-      "value": 1208305
+      "value": 1200376
     },
     {
       "code": "IQ",
       "name": "Iraq",
-      "value": 1204927
+      "value": 1197020
     },
     {
       "code": "UY",
       "name": "Uruguay",
-      "value": 1158245
+      "value": 1150644
     },
     {
       "code": "UG",
       "name": "Uganda",
-      "value": 1129183
+      "value": 1121774
     },
     {
       "code": "KZ",
       "name": "Kazakhstan",
-      "value": 1114385
+      "value": 1107073
     },
     {
       "code": "TZ",
       "name": "Tanzania",
-      "value": 1112449
+      "value": 1105149
     },
     {
       "code": "BG",
       "name": "Bulgaria",
-      "value": 1092459
+      "value": 1085290
     },
     {
       "code": "CM",
       "name": "Cameroon",
-      "value": 1034088
+      "value": 1027302
     },
     {
       "code": "PA",
       "name": "Panama",
-      "value": 1027361
+      "value": 1020619
     },
     {
       "code": "ET",
       "name": "Ethiopia",
-      "value": 1026253
+      "value": 1019519
     },
     {
       "code": "SN",
       "name": "Senegal",
-      "value": 968785
+      "value": 962428
     },
     {
       "code": "PR",
       "name": "Puerto Rico",
-      "value": 917540
+      "value": 911519
     },
     {
       "code": "HR",
       "name": "Croatia",
-      "value": 891900
+      "value": 886047
     },
     {
       "code": "LB",
       "name": "Lebanon",
-      "value": 884064
+      "value": 878262
     },
     {
       "code": "ZW",
       "name": "Zimbabwe",
-      "value": 869428
+      "value": 863722
     },
     {
       "code": "AO",
       "name": "Angola",
-      "value": 852734
+      "value": 847138
     },
     {
       "code": "KW",
       "name": "Kuwait",
-      "value": 839227
+      "value": 833720
     },
     {
       "code": "SK",
       "name": "Slovakia",
-      "value": 815553
+      "value": 810201
     },
     {
       "code": "AZ",
       "name": "Azerbaijan",
-      "value": 770936
+      "value": 765877
     },
     {
       "code": "OM",
       "name": "Oman",
-      "value": 753848
+      "value": 748902
     },
     {
       "code": "SV",
       "name": "El Salvador",
-      "value": 744809
+      "value": 739922
     },
     {
       "code": "ZM",
       "name": "Zambia",
-      "value": 735115
+      "value": 730292
     },
     {
       "code": "PY",
       "name": "Paraguay",
-      "value": 734734
+      "value": 729912
     },
     {
       "code": "OO",
       "name": "Other",
-      "value": 728712
+      "value": 723929
     },
     {
       "code": "BY",
       "name": "Belarus",
-      "value": 687228
+      "value": 682718
     },
     {
       "code": "LT",
       "name": "Lithuania",
-      "value": 682340
+      "value": 677862
     },
     {
       "code": "HN",
       "name": "Honduras",
-      "value": 671825
+      "value": 667417
     },
     {
       "code": "JM",
       "name": "Jamaica",
-      "value": 651132
+      "value": 646859
     },
     {
       "code": "MM",
       "name": "Myanmar (Burma)",
-      "value": 627661
+      "value": 623543
     },
     {
       "code": "CD",
       "name": "Congo - Kinshasa",
-      "value": 620121
+      "value": 616051
     },
     {
       "code": "GE",
       "name": "Georgia",
-      "value": 578818
+      "value": 575020
     },
     {
       "code": "MZ",
       "name": "Mozambique",
-      "value": 557969
+      "value": 554307
     },
     {
       "code": "KH",
       "name": "Cambodia",
-      "value": 547727
+      "value": 544133
     },
     {
       "code": "NI",
       "name": "Nicaragua",
-      "value": 532673
+      "value": 529178
     },
     {
       "code": "TT",
       "name": "Trinidad & Tobago",
-      "value": 507453
+      "value": 504123
     },
     {
       "code": "SI",
       "name": "Slovenia",
-      "value": 493824
+      "value": 490583
     },
     {
       "code": "AL",
       "name": "Albania",
-      "value": 476162
+      "value": 473038
     },
     {
       "code": "BH",
       "name": "Bahrain",
-      "value": 472322
+      "value": 469223
     },
     {
       "code": "LV",
       "name": "Latvia",
-      "value": 466192
+      "value": 463133
     },
     {
       "code": "CY",
       "name": "Cyprus",
-      "value": 465388
+      "value": 462334
     },
     {
       "code": "UZ",
       "name": "Uzbekistan",
-      "value": 442611
+      "value": 439707
     },
     {
       "code": "MU",
       "name": "Mauritius",
-      "value": 424397
+      "value": 421612
     },
     {
       "code": "SY",
       "name": "Syria",
-      "value": 411535
+      "value": 408835
     },
     {
       "code": "LU",
       "name": "Luxembourg",
-      "value": 391316
+      "value": 388748
     },
     {
       "code": "RW",
       "name": "Rwanda",
-      "value": 385402
+      "value": 382873
     },
     {
       "code": "AF",
       "name": "Afghanistan",
-      "value": 382245
+      "value": 379737
     },
     {
       "code": "BW",
       "name": "Botswana",
-      "value": 372795
+      "value": 370349
     },
     {
       "code": "BJ",
       "name": "Benin",
-      "value": 370847
+      "value": 368413
     },
     {
       "code": "PG",
       "name": "Papua New Guinea",
-      "value": 369808
+      "value": 367382
     },
     {
       "code": "MG",
       "name": "Madagascar",
-      "value": 365562
+      "value": 363163
     },
     {
       "code": "SD",
       "name": "Sudan",
-      "value": 364148
+      "value": 361758
     },
     {
       "code": "BA",
       "name": "Bosnia & Herzegovina",
-      "value": 352695
+      "value": 350381
     },
     {
       "code": "EE",
       "name": "Estonia",
-      "value": 348315
+      "value": 346028
     },
     {
       "code": "NA",
       "name": "Namibia",
-      "value": 344153
+      "value": 341894
     },
     {
       "code": "AM",
       "name": "Armenia",
-      "value": 338914
+      "value": 336690
     },
     {
       "code": "MK",
       "name": "North Macedonia",
-      "value": 333498
+      "value": 331310
     },
     {
       "code": "BF",
       "name": "Burkina Faso",
-      "value": 332743
+      "value": 330560
     },
     {
       "code": "MT",
       "name": "Malta",
-      "value": 316608
+      "value": 314530
     },
     {
       "code": "LY",
       "name": "Libya",
-      "value": 305656
+      "value": 303650
     },
     {
       "code": "MD",
       "name": "Moldova",
-      "value": 304087
+      "value": 302092
     },
     {
       "code": "ML",
       "name": "Mali",
-      "value": 294618
+      "value": 292685
     },
     {
       "code": "YE",
       "name": "Yemen",
-      "value": 290792
+      "value": 288884
     },
     {
       "code": "MW",
       "name": "Malawi",
-      "value": 273729
+      "value": 271933
     },
     {
       "code": "CU",
       "name": "Cuba",
-      "value": 262599
+      "value": 260875
     },
     {
       "code": "PS",
       "name": "Palestinian Territories",
-      "value": 257551
+      "value": 255860
     },
     {
       "code": "HT",
       "name": "Haiti",
-      "value": 248704
+      "value": 247071
     },
     {
       "code": "IS",
       "name": "Iceland",
-      "value": 239718
+      "value": 238145
     },
     {
       "code": "TG",
       "name": "Togo",
-      "value": 238929
+      "value": 237361
     },
     {
       "code": "MN",
       "name": "Mongolia",
-      "value": 234193
+      "value": 232656
     },
     {
       "code": "RE",
       "name": "Réunion",
-      "value": 228981
+      "value": 227478
     },
     {
       "code": "GN",
       "name": "Guinea",
-      "value": 220127
+      "value": 218683
     },
     {
       "code": "SO",
       "name": "Somalia",
-      "value": 215032
+      "value": 213621
     },
     {
       "code": "FJ",
       "name": "Fiji",
-      "value": 205761
+      "value": 204410
     },
     {
       "code": "GA",
       "name": "Gabon",
-      "value": 202052
+      "value": 200725
     },
     {
       "code": "CG",
       "name": "Congo - Brazzaville",
-      "value": 183274
+      "value": 182071
     },
     {
       "code": "BS",
       "name": "Bahamas",
-      "value": 171533
+      "value": 170407
     },
     {
       "code": "KG",
       "name": "Kyrgyzstan",
-      "value": 152473
+      "value": 151473
     },
     {
       "code": "MV",
       "name": "Maldives",
-      "value": 144795
+      "value": 143845
     },
     {
       "code": "MO",
       "name": "Macao SAR China",
-      "value": 132145
+      "value": 131278
     },
     {
       "code": "LR",
       "name": "Liberia",
-      "value": 131971
+      "value": 131105
     },
     {
       "code": "BB",
       "name": "Barbados",
-      "value": 130835
+      "value": 129976
     },
     {
       "code": "GP",
       "name": "Guadeloupe",
-      "value": 125908
+      "value": 125081
     },
     {
       "code": "SL",
       "name": "Sierra Leone",
-      "value": 123242
+      "value": 122433
     },
     {
       "code": "NE",
       "name": "Niger",
-      "value": 122846
+      "value": 122039
     },
     {
       "code": "ME",
       "name": "Montenegro",
-      "value": 118585
+      "value": 117806
     },
     {
       "code": "MQ",
       "name": "Martinique",
-      "value": 112564
+      "value": 111826
     },
     {
       "code": "BN",
       "name": "Brunei",
-      "value": 109881
+      "value": 109160
     },
     {
       "code": "LA",
       "name": "Laos",
-      "value": 108081
+      "value": 107372
     },
     {
       "code": "GY",
       "name": "Guyana",
-      "value": 107614
+      "value": 106907
     },
     {
       "code": "MR",
       "name": "Mauritania",
-      "value": 103375
+      "value": 102697
     },
     {
       "code": "SZ",
       "name": "Eswatini",
-      "value": 102177
+      "value": 101507
     },
     {
       "code": "GM",
       "name": "Gambia",
-      "value": 100022
+      "value": 99365
     },
     {
       "code": "SR",
       "name": "Suriname",
-      "value": 99002
+      "value": 98352
     },
     {
       "code": "LS",
       "name": "Lesotho",
-      "value": 97760
+      "value": 97118
     },
     {
       "code": "TD",
       "name": "Chad",
-      "value": 90252
+      "value": 89659
     },
     {
       "code": "BT",
       "name": "Bhutan",
-      "value": 88599
+      "value": 88018
     },
     {
       "code": "KO",
       "name": "Kosovo (KO)",
-      "value": 82761
+      "value": 82218
     },
     {
       "code": "BI",
       "name": "Burundi",
-      "value": 81170
+      "value": 80637
     },
     {
       "code": "NC",
       "name": "New Caledonia",
-      "value": 77664
+      "value": 77155
     },
     {
       "code": "BZ",
       "name": "Belize",
-      "value": 72075
+      "value": 71601
     },
     {
       "code": "SS",
       "name": "South Sudan",
-      "value": 71564
+      "value": 71095
     },
     {
       "code": "GU",
       "name": "Guam",
-      "value": 68823
+      "value": 68372
     },
     {
       "code": "PF",
       "name": "French Polynesia",
-      "value": 67562
+      "value": 67119
     },
     {
       "code": "EH",
       "name": "Western Sahara",
-      "value": 67347
+      "value": 66904
     },
     {
       "code": "CV",
       "name": "Cape Verde",
-      "value": 65353
+      "value": 64924
     },
     {
       "code": "TJ",
       "name": "Tajikistan",
-      "value": 63539
+      "value": 63122
     },
     {
       "code": "DJ",
       "name": "Djibouti",
-      "value": 62271
+      "value": 61863
     },
     {
       "code": "KY",
       "name": "Cayman Islands",
-      "value": 60979
+      "value": 60579
     },
     {
       "code": "BM",
       "name": "Bermuda",
-      "value": 58083
+      "value": 57702
     },
     {
       "code": "JE",
       "name": "Jersey",
-      "value": 57995
+      "value": 57614
     },
     {
       "code": "AW",
       "name": "Aruba",
-      "value": 54634
+      "value": 54276
     },
     {
       "code": "MC",
       "name": "Monaco",
-      "value": 53281
+      "value": 52931
     },
     {
       "code": "LC",
       "name": "St. Lucia",
-      "value": 52332
+      "value": 51989
     },
     {
       "code": "AD",
       "name": "Andorra",
-      "value": 51461
+      "value": 51124
     },
     {
       "code": "VI",
       "name": "U.S. Virgin Islands",
-      "value": 50331
+      "value": 50001
     },
     {
       "code": "GF",
       "name": "French Guiana",
-      "value": 47083
+      "value": 46774
     },
     {
       "code": "AN",
       "name": "Netherlands Antilles",
-      "value": 42865
+      "value": 42584
     },
     {
       "code": "XK",
       "name": "Kosovo",
-      "value": 41770
+      "value": 41496
     },
     {
       "code": "CS",
       "name": "Serbia and Montenegro",
-      "value": 41721
+      "value": 41448
     },
     {
       "code": "AS",
       "name": "American Samoa",
-      "value": 41435
+      "value": 41164
     },
     {
       "code": "IM",
       "name": "Isle of Man",
-      "value": 40395
+      "value": 40130
     },
     {
       "code": "TM",
       "name": "Turkmenistan",
-      "value": 38751
+      "value": 38496
     },
     {
       "code": "AG",
       "name": "Antigua & Barbuda",
-      "value": 36835
+      "value": 36593
     },
     {
       "code": "CW",
       "name": "Curaçao",
-      "value": 34896
+      "value": 34667
     },
     {
       "code": "SC",
       "name": "Seychelles",
-      "value": 34501
+      "value": 34275
     },
     {
       "code": "CF",
       "name": "Central African Republic",
-      "value": 34171
+      "value": 33947
     },
     {
       "code": "GD",
       "name": "Grenada",
-      "value": 33684
+      "value": 33463
     },
     {
       "code": "GQ",
       "name": "Equatorial Guinea",
-      "value": 31746
+      "value": 31538
     },
     {
       "code": "GG",
       "name": "Guernsey",
-      "value": 31370
+      "value": 31165
     },
     {
       "code": "GI",
       "name": "Gibraltar",
-      "value": 28492
+      "value": 28305
     },
     {
       "code": "VC",
       "name": "St. Vincent & Grenadines",
-      "value": 26589
+      "value": 26414
     },
     {
       "code": "LI",
       "name": "Liechtenstein",
-      "value": 23647
+      "value": 23492
     },
     {
       "code": "YT",
       "name": "Mayotte",
-      "value": 22639
+      "value": 22490
     },
     {
       "code": "SB",
       "name": "Solomon Islands",
-      "value": 21646
+      "value": 21504
     },
     {
       "code": "AX",
       "name": "Åland Islands",
-      "value": 21130
+      "value": 20991
     },
     {
       "code": "DM",
       "name": "Dominica",
-      "value": 20859
+      "value": 20722
     },
     {
       "code": "KM",
       "name": "Comoros",
-      "value": 20356
+      "value": 20223
     },
     {
       "code": "TC",
       "name": "Turks & Caicos Islands",
-      "value": 20109
+      "value": 19977
     },
     {
       "code": "KN",
       "name": "St. Kitts & Nevis",
-      "value": 19261
+      "value": 19135
     },
     {
       "code": "GL",
       "name": "Greenland",
-      "value": 19202
+      "value": 19075
     },
     {
       "code": "TL",
       "name": "Timor-Leste",
-      "value": 18933
+      "value": 18809
     },
     {
       "code": "VU",
       "name": "Vanuatu",
-      "value": 18382
+      "value": 18261
     },
     {
       "code": "FO",
       "name": "Faroe Islands",
-      "value": 18125
+      "value": 18006
     },
     {
       "code": "VG",
       "name": "British Virgin Islands",
-      "value": 18067
+      "value": 17948
     },
     {
       "code": "GW",
       "name": "Guinea-Bissau",
-      "value": 16571
+      "value": 16462
     },
     {
       "code": "WS",
       "name": "Samoa",
-      "value": 15752
+      "value": 15649
     },
     {
       "code": "UN",
       "name": "Unspecified",
-      "value": 15130
+      "value": 15031
     },
     {
       "code": "MP",
       "name": "Northern Mariana Islands",
-      "value": 14654
+      "value": 14558
     },
     {
       "code": "TO",
       "name": "Tonga",
-      "value": 13356
+      "value": 13269
     },
     {
       "code": "AI",
       "name": "Anguilla",
-      "value": 13344
+      "value": 13256
     },
     {
       "code": "SM",
       "name": "San Marino",
-      "value": 13174
+      "value": 13088
     },
     {
       "code": "AQ",
       "name": "Antarctica",
-      "value": 11631
+      "value": 11555
     },
     {
       "code": "FM",
       "name": "Micronesia",
-      "value": 10685
+      "value": 10615
     },
     {
       "code": "TP",
       "name": "East Timor",
-      "value": 9829
+      "value": 9764
     },
     {
       "code": "ER",
       "name": "Eritrea",
-      "value": 9344
+      "value": 9282
     },
     {
       "code": "KI",
       "name": "Kiribati",
-      "value": 9077
+      "value": 9018
     },
     {
       "code": "MH",
       "name": "Marshall Islands",
-      "value": 8914
+      "value": 8856
     },
     {
       "code": "ST",
       "name": "São Tomé & Príncipe",
-      "value": 8769
+      "value": 8712
     },
     {
       "code": "IO",
       "name": "British Indian Ocean Territory",
-      "value": 8707
+      "value": 8650
     },
     {
       "code": "CK",
       "name": "Cook Islands",
-      "value": 8276
+      "value": 8222
     },
     {
       "code": "PW",
       "name": "Palau",
-      "value": 6125
+      "value": 6085
     },
     {
       "code": "CB",
       "name": "Caribbean",
-      "value": 4851
+      "value": 4819
     },
     {
       "code": "YU",
       "name": "Yugoslavia",
-      "value": 4769
+      "value": 4737
     },
     {
       "code": "VA",
       "name": "Vatican City",
-      "value": 4381
+      "value": 4352
     },
     {
       "code": "KP",
       "name": "North Korea",
-      "value": 3532
+      "value": 3508
     },
     {
       "code": "CX",
       "name": "Christmas Island",
-      "value": 3308
+      "value": 3287
     },
     {
       "code": "NR",
       "name": "Nauru",
-      "value": 3021
+      "value": 3002
     },
     {
       "code": "TV",
       "name": "Tuvalu",
-      "value": 2968
+      "value": 2948
     },
     {
       "code": "FK",
       "name": "Falkland Islands",
-      "value": 2816
+      "value": 2798
     },
     {
       "code": "WF",
       "name": "Wallis & Futuna",
-      "value": 2786
+      "value": 2768
     },
     {
       "code": "PM",
       "name": "St. Pierre & Miquelon",
-      "value": 2731
+      "value": 2713
     },
     {
       "code": "MS",
       "name": "Montserrat",
-      "value": 2461
+      "value": 2445
     },
     {
       "code": "SH",
       "name": "St. Helena",
-      "value": 2417
+      "value": 2401
     },
     {
       "code": "SX",
       "name": "Sint Maarten",
-      "value": 2178
+      "value": 2164
     },
     {
       "code": "BQ",
       "name": "Caribbean Netherlands",
-      "value": 1848
+      "value": 1836
     },
     {
       "code": "TF",
       "name": "French Southern Territories",
-      "value": 1794
+      "value": 1782
     },
     {
       "code": "NU",
       "name": "Niue",
-      "value": 1780
+      "value": 1768
     },
     {
       "code": "MF",
       "name": "St. Martin",
-      "value": 1676
+      "value": 1664
     },
     {
       "code": "NF",
       "name": "Norfolk Island",
-      "value": 1561
+      "value": 1551
     },
     {
       "code": "SJ",
       "name": "Svalbard & Jan Mayen",
-      "value": 1519
+      "value": 1510
     },
     {
       "code": "CC",
       "name": "Cocos (Keeling) Islands",
-      "value": 1427
+      "value": 1417
     },
     {
       "code": "EU",
       "name": "Europe",
-      "value": 1176
+      "value": 1169
     },
     {
       "code": "GS",
       "name": "South Georgia & South Sandwich Islands",
-      "value": 1146
+      "value": 1139
     },
     {
       "code": "PN",
       "name": "Pitcairn Islands",
-      "value": 1070
+      "value": 1062
     },
     {
       "code": "TK",
       "name": "Tokelau",
-      "value": 1060
+      "value": 1052
     },
     {
       "code": "BL",
       "name": "St. Barthélemy",
-      "value": 1002
+      "value": 995
     },
     {
       "code": "BV",
       "name": "Bouvet Island",
-      "value": 675
+      "value": 671
     },
     {
       "code": "HM",
       "name": "Heard & McDonald Islands",
-      "value": 666
+      "value": 661
     },
     {
       "code": "UM",
       "name": "U.S. Outlying Islands",
-      "value": 592
+      "value": 588
     }
   ]
 }

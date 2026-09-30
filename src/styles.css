@@ -814,23 +814,54 @@ button { cursor: pointer; }
   font-size: 15px;
   letter-spacing: -0.02em;
 }
+.dossier.is-profile {
+  padding: 4px 2px 8px;
+}
+.dossier.is-profile .dossier-title {
+  padding: 12px;
+  border-radius: 18px;
+  border: 1px solid rgba(196, 160, 255, 0.4);
+  background:
+    radial-gradient(120px 80px at 0% 0%, rgba(0, 210, 255, 0.16), transparent 70%),
+    linear-gradient(180deg, rgba(93, 23, 213, 0.28), rgba(255, 255, 255, 0.03));
+}
+.profile-card { margin-top: 14px; }
+.fill-group { margin-top: 16px; }
+.fill-group h3 {
+  margin: 0 0 8px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #c9b6ff;
+}
 .fill-list {
   list-style: none;
-  margin: 12px 0 0;
+  margin: 0;
   padding: 0;
   display: grid;
   gap: 6px;
 }
 .fill-list li {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 12px;
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 10px;
   padding: 8px 10px;
-  border-radius: 12px;
+  border-radius: 14px;
   background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.07);
 }
+.field-icon {
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  border-radius: 9px;
+  color: #9befff;
+  background: rgba(0, 210, 255, 0.12);
+}
+.field-icon svg { width: 16px; height: 16px; display: block; }
 .fill-list span {
   min-width: 0;
   color: var(--muted);
@@ -844,11 +875,18 @@ button { cursor: pointer; }
   color: #c9b6ff;
   font-size: 11px;
 }
-.fill-list b {
-  flex: none;
+.fill-list span b {
+  display: block;
+  height: 3px;
+  margin-top: 6px;
+  border-radius: 99px;
+  background: linear-gradient(90deg, #00d2ff, #8b6cff);
+}
+.fill-list strong {
   font-variant-numeric: tabular-nums;
   font-weight: 600;
   letter-spacing: -0.03em;
+  font-size: 13px;
 }
 .gate-card label {
   display: block;
