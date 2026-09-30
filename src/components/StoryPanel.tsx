@@ -1,6 +1,7 @@
 import { phaseInsights, type CountryRow, type PhaseStats } from '../lib/analytics';
 import { formatCompact, formatFull } from '../lib/format';
 import type { PlacePoint } from '../lib/land';
+import { filledCount, PROFILE_FIELDS, PROFILE_TOTAL } from '../lib/profile-fills';
 import { REGION_COLOR, type RegionId } from '../lib/regions';
 import type { PhaseFile } from '../phases/types';
 import { Flag } from './Flag';
@@ -33,6 +34,19 @@ export function StoryPanel({ phase, stats, selected, region, places, onSelect, o
           onBack={() => onSelect(null)}
           onSelect={onSelect}
         />
+      </section>
+    );
+  }
+
+  if (phase.id === 'profile-graph') {
+    return (
+      <section className="panel story" aria-label="Profile field counts">
+        <p className="eyebrow">Database</p>
+        <h2>Field counts</h2>
+        <p className="hint">Counts for all {formatFull(PROFILE_TOTAL)} profiles. Country cards use the same fields on that country’s own profile count.</p>
+        <p className="index-note">Index note. Figures in this room can differ by up to 5%.</p>
+        <FillCounts profiles={PROFILE_TOTAL} />
+        <p className="source">{phase.summary}</p>
       </section>
     );
   }
@@ -104,6 +118,28 @@ export function StoryPanel({ phase, stats, selected, region, places, onSelect, o
   );
 }
 
+function FillCounts({ profiles }: { profiles: number }) {
+  const rows = PROFILE_FIELDS.map((field, index) => ({
+    ...field,
+    index,
+    count: filledCount(profiles, field.bps),
+  })).sort((a, b) => b.count - a.count || a.index - b.index);
+
+  return (
+    <ol className="fill-list">
+      {rows.map((field) => (
+        <li key={field.key}>
+          <span>
+            {field.label}
+            {'note' in field && field.note ? <em>{field.note}</em> : null}
+          </span>
+          <b>{formatFull(field.count)}</b>
+        </li>
+      ))}
+    </ol>
+  );
+}
+
 function Dossier({
   phase,
   stats,
@@ -135,6 +171,9 @@ function Dossier({
       </div>
       <p className="hero-num">{formatFull(row.value)}</p>
       <p className="hero-sub">{phase.noun}</p>
+      {phase.id === 'profile-graph' && (
+        <p className="index-note">Index note. Figures in this room can differ by up to 5%.</p>
+      )}
       {row.code !== 'unknown' && (
         <p className="hint">
           Country {row.rank} of {stats.locations.length}
@@ -142,6 +181,12 @@ function Dossier({
       )}
       {phase.id === 'personal-email' && (
         <MailboxMix variant="list" heading="Mailbox mix" stats={stats} focus={row.code} />
+      )}
+      {phase.id === 'profile-graph' && (
+        <>
+          <h3 className="fill-heading">Filled in this country</h3>
+          <FillCounts profiles={row.value} />
+        </>
       )}
 
       {row.code === 'unknown' ? (

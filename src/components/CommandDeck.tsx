@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef } from 'react';
 import type { CountryRow, PhaseStats } from '../lib/analytics';
 import { presence, ramp } from '../lib/color';
 import { formatCompact, formatFull } from '../lib/format';
+import { PROFILE_TOTAL } from '../lib/profile-fills';
 import { useCountUp } from '../lib/useCountUp';
 import type { PhaseFile } from '../phases/types';
 import type { RegionId } from '../lib/regions';
@@ -33,7 +34,8 @@ export function CommandDeck({
   onSelect,
 }: Props) {
   const searchRef = useRef<HTMLInputElement>(null);
-  const total = useCountUp(stats.total);
+  const graph = phase.id === 'profile-graph';
+  const total = useCountUp(graph ? PROFILE_TOTAL : stats.total);
   const leader = stats.leader;
 
   useEffect(() => {
@@ -70,12 +72,16 @@ export function CommandDeck({
       stats.unknown.name.toLowerCase().includes(query.trim().toLowerCase()));
 
   return (
-    <section className="panel deck" aria-label="Personal email ranking">
+    <section className="panel deck" aria-label={graph ? 'Profile ranking' : 'Personal email ranking'}>
       <p className="eyebrow">{phase.kicker}</p>
       <h1>{phase.title}</h1>
       <p className="hero-num">{formatFull(total)}</p>
-      <p className="hero-sub">{phase.noun} in this phase</p>
-      <p className="hint">Open any country. The number is the records on file.</p>
+      <p className="hero-sub">{graph ? 'profiles in the database' : `${phase.noun} in this phase`}</p>
+      <p className="hint">
+        {graph
+          ? 'Open a country. Its card counts how many of its profiles carry each field. Figures in this room can differ by up to 5%.'
+          : 'Open any country. The number is the records on file.'}
+      </p>
 
       <div className="stat-grid">
         <article>
@@ -133,7 +139,7 @@ export function CommandDeck({
 
       <div className="list-head">
         <span>{region ? shown.length : `${shown.length} countries`}</span>
-        <span>Records</span>
+        <span>{graph ? 'Profiles' : 'Records'}</span>
       </div>
       <ol className="rank-list">
         {shown.map((row) => (

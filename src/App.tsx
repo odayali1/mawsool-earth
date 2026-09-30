@@ -1,10 +1,12 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { CommandDeck } from './components/CommandDeck';
 import { EarthGlobe, type EarthGlobeHandle } from './components/EarthGlobe';
+import { JobChangeEngine } from './components/JobChangeEngine';
 import { MailboxMix } from './components/MailboxMix';
 import { StoryPanel } from './components/StoryPanel';
 import { TopBar } from './components/TopBar';
 import { analyze } from './lib/analytics';
+import { PROFILE_TOTAL } from './lib/profile-fills';
 import { asset } from './lib/asset';
 import extraPlaces from './lib/extra-places.json';
 import type { LandCollection, LandFeature, PlacePoint } from './lib/land';
@@ -23,6 +25,8 @@ export function App() {
   const [region, setRegion] = useState<RegionId | null>(null);
   const [hover, setHover] = useState<string | null>(null);
   const [selected, setSelected] = useState<string | null>(null);
+  const [room, setRoom] = useState<'earth' | 'engine'>('earth');
+  const [locks, setLocks] = useState<{ code: string; name: string }[]>([]);
   const [orbit, setOrbit] = useState(
     () => !window.matchMedia('(prefers-reduced-motion: reduce)').matches,
   );
@@ -61,8 +65,9 @@ export function App() {
 
   useEffect(() => {
     if (!phase) return;
-    document.title = `Mawsool Earth — ${phase.title}`;
-  }, [phase]);
+    document.title =
+      room === 'engine' ? 'Mawsool Earth — Job Change' : `Mawsool Earth — ${phase.title}`;
+  }, [phase, room]);
 
   useEffect(() => {
     if (globeReady || failed) return;
@@ -96,6 +101,7 @@ export function App() {
   }, [query, region, selected]);
 
   function choosePhase(id: string) {
+    setRoom('earth');
     setPhaseId(id);
     setSelected(null);
     setHover(null);
@@ -128,7 +134,7 @@ export function App() {
       : (stats.locations.find((row) => row.code === selected) ?? null);
 
   return (
-    <div className="app">
+    <div className={room === 'engine' ? 'app is-engine' : 'app'}>
       <div className="globe-layer">
         {land && (
           <EarthGlobe
@@ -141,6 +147,8 @@ export function App() {
             selected={selected}
             region={region}
             orbit={orbit}
+            mode={room}
+            onLocks={setLocks}
             globeRef={globeRef}
             onHover={hoverTo}
             onSelect={select}
@@ -156,44 +164,54 @@ export function App() {
       <div className="vignette" />
       <div className="hud">
         <TopBar
-          phases={phases}
           phase={phase}
-          total={stats.total}
+          total={phase.id === 'profile-graph' ? PROFILE_TOTAL : stats.total}
           orbit={orbit}
+          room={room}
           onPhase={choosePhase}
+          onRoom={() => {
+            setRoom('engine');
+            setOrbit(false);
+          }}
           onOrbit={setOrbit}
         />
-        <div className="columns">
-          <CommandDeck
-            phase={phase}
-            stats={stats}
-            query={query}
-            region={region}
-            hover={hover}
-            selected={selected}
-            onQuery={setQuery}
-            onRegion={setRegion}
-            onHover={hoverTo}
-            onSelect={select}
-          />
-          <StoryPanel
-            phase={phase}
-            stats={stats}
-            selected={selected}
-            region={region}
-            places={places}
-            onSelect={select}
-            onRegion={setRegion}
-          />
-        </div>
-        {phase.id === 'personal-email' && (
-          <MailboxMix
-            variant="dock"
-            stats={stats}
-            focus={picked?.code ?? null}
-            heading={picked?.name ?? 'Mailbox mix'}
-            flagCode={picked && picked.code !== 'unknown' ? picked.code : undefined}
-          />
+        {room === 'engine' ? (
+          <JobChangeEngine locks={locks} />
+        ) : (
+          <>
+            <div className="columns">
+              <CommandDeck
+                phase={phase}
+                stats={stats}
+                query={query}
+                region={region}
+                hover={hover}
+                selected={selected}
+                onQuery={setQuery}
+                onRegion={setRegion}
+                onHover={hoverTo}
+                onSelect={select}
+              />
+              <StoryPanel
+                phase={phase}
+                stats={stats}
+                selected={selected}
+                region={region}
+                places={places}
+                onSelect={select}
+                onRegion={setRegion}
+              />
+            </div>
+            {phase.id === 'personal-email' && (
+              <MailboxMix
+                variant="dock"
+                stats={stats}
+                focus={picked?.code ?? null}
+                heading={picked?.name ?? 'Mailbox mix'}
+                flagCode={picked && picked.code !== 'unknown' ? picked.code : undefined}
+              />
+            )}
+          </>
         )}
       </div>
       {bootMounted && (

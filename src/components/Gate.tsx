@@ -52,7 +52,24 @@ export function Gate({ children }: { children: ReactNode }) {
         <img src={asset('brand/logo-on-dark.svg')} alt="Mawsool" />
         <p className="eyebrow">Private room</p>
         <h1>Mawsool Earth</h1>
-        <p className="gate-copy">Personal email, counted by country.</p>
+        <p className="gate-copy">Three rooms are inside. Pick one after you enter.</p>
+        <ul className="gate-rooms">
+          <li>
+            <small>01</small>
+            <strong>Personal Email</strong>
+            <em>Counted by country</em>
+          </li>
+          <li>
+            <small>02</small>
+            <strong>Job Change</strong>
+            <em>Radar on the earth</em>
+          </li>
+          <li>
+            <small>03</small>
+            <strong>1B Profiles</strong>
+            <em>Field counts for the database</em>
+          </li>
+        </ul>
         <label htmlFor={fieldId}>Password</label>
         <div className="gate-field">
           <input
