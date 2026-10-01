@@ -339,6 +339,36 @@ button { cursor: pointer; }
 .ghost-card strong { display: block; margin-top: 2px; }
 .ghost-card b { display: block; text-align: right; font-variant-numeric: tabular-nums; }
 .ghost-card em { display: block; color: var(--faint); font-style: normal; font-size: 12px; text-align: right; }
+.index-balance {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 14px;
+}
+.index-balance div {
+  padding: 10px 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 196, 92, 0.28);
+  background: rgba(255, 196, 92, 0.06);
+}
+.index-balance small {
+  display: block;
+  color: #f3d7a1;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.index-balance strong {
+  display: block;
+  margin-top: 4px;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.03em;
+}
+.ghost-card.index-pending {
+  border-color: rgba(255, 196, 92, 0.45);
+  background: rgba(255, 196, 92, 0.07);
+}
+.ghost-card.index-pending small { color: #f3d7a1; }
 .ghost-card.is-on, .row.is-on, .region-list button.is-on {
   border-color: rgba(0, 210, 255, 0.55);
   background: rgba(0, 210, 255, 0.08);

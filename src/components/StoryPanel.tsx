@@ -23,6 +23,31 @@ export function StoryPanel({ phase, stats, selected, region, places, onSelect, o
       ? stats.unknown
       : (stats.locations.find((item) => item.code === selected) ?? null);
 
+  if (phase.id === 'profile-graph' && selected === 'unindexed') {
+    const pending = PROFILE_TOTAL - stats.total;
+    return (
+      <section className="panel story" aria-live="polite">
+        <div className="dossier is-profile">
+          <button type="button" className="back" onClick={() => onSelect(null)}>
+            All countries
+          </button>
+          <div className="dossier-title">
+            <div>
+              <p className="eyebrow">Not indexed yet</p>
+              <h2>Outside the country index</h2>
+            </div>
+          </div>
+          <p className="hero-num">{formatFull(pending)}</p>
+          <p className="hero-sub">profiles</p>
+          <p className="index-note">
+            These profiles are in the database of {formatFull(PROFILE_TOTAL)}. They are not in the country index of{' '}
+            {formatFull(stats.total)} yet, so they stay off the map and out of the country cards.
+          </p>
+        </div>
+      </section>
+    );
+  }
+
   if (row) {
     return (
       <section className="panel story" aria-live="polite">
@@ -43,7 +68,11 @@ export function StoryPanel({ phase, stats, selected, region, places, onSelect, o
       <section className="panel story" aria-label="Profile field counts">
         <p className="eyebrow">Database</p>
         <h2>Field counts</h2>
-        <p className="hint">Counts for all {formatFull(PROFILE_TOTAL)} profiles. Country cards use the same fields on that country’s own profile count.</p>
+        <p className="hint">
+          Counts for all {formatFull(PROFILE_TOTAL)} profiles. {formatFull(stats.total)} are in the country index.{' '}
+          {formatFull(PROFILE_TOTAL - stats.total)} are not indexed yet. Country cards use the same fields on that
+          country’s own profile count.
+        </p>
         <p className="index-note">Index note. Figures in this room can differ by up to 5%.</p>
         <FillCounts profiles={PROFILE_TOTAL} />
         <p className="source">{phase.summary}</p>

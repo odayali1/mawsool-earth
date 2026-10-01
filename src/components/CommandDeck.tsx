@@ -82,6 +82,18 @@ export function CommandDeck({
           ? 'Open a country. Its card counts how many of its profiles carry each field. Figures in this room can differ by up to 5%.'
           : 'Open any country. The number is the records on file.'}
       </p>
+      {graph && (
+        <div className="index-balance">
+          <div>
+            <small>Country index</small>
+            <strong>{formatFull(stats.total)}</strong>
+          </div>
+          <div>
+            <small>Not indexed yet</small>
+            <strong>{formatFull(PROFILE_TOTAL - stats.total)}</strong>
+          </div>
+        </div>
+      )}
 
       <div className="stat-grid">
         <article>
@@ -117,6 +129,23 @@ export function CommandDeck({
         <button type="button" className="filter-chip" onClick={() => onRegion(null)}>
           {region}
           <span>Clear</span>
+        </button>
+      )}
+
+      {graph && !region && (!query.trim() || 'not indexed yet'.includes(query.trim().toLowerCase())) && (
+        <button
+          type="button"
+          className={selected === 'unindexed' ? 'ghost-card index-pending is-on' : 'ghost-card index-pending'}
+          onClick={() => onSelect(selected === 'unindexed' ? null : 'unindexed')}
+        >
+          <span>
+            <small>Not indexed yet</small>
+            <strong>Outside the country index</strong>
+          </span>
+          <span>
+            <b>{formatFull(PROFILE_TOTAL - stats.total)}</b>
+            <em>in the database</em>
+          </span>
         </button>
       )}
 
