@@ -153,7 +153,6 @@ const FIELD_GROUP: Record<string, string> = {
   urn: 'Identity',
   pronoun: 'Identity',
   logo_url: 'Identity',
-  public_profile_url: 'Identity',
   connections_count: 'Presence',
   followers_count: 'Presence',
   last_verified_at: 'Presence',
@@ -183,6 +182,13 @@ const FIELD_GROUP: Record<string, string> = {
 
 const GROUP_ORDER = ['Identity', 'Presence', 'Work', 'Record'];
 
+/** Opens short bars without changing the count. Full fields still fill the track. */
+function barWidth(count: number, profiles: number) {
+  if (profiles <= 0 || count <= 0) return 0;
+  const share = Math.min(1, count / profiles);
+  return Math.pow(share, 0.35) * 100;
+}
+
 function FillCounts({ profiles }: { profiles: number }) {
   const rows = PROFILE_FIELDS.map((field, index) => ({
     ...field,
@@ -209,7 +215,9 @@ function FillCounts({ profiles }: { profiles: number }) {
                   <span>
                     {field.label}
                     {'note' in field && field.note ? <em>{field.note}</em> : null}
-                    <b style={{ width: `${profiles > 0 ? (field.count / profiles) * 100 : 0}%` }} />
+                    <b>
+                      <i style={{ width: `${barWidth(field.count, profiles)}%` }} />
+                    </b>
                   </span>
                   <strong>{formatFull(field.count)}</strong>
                 </li>
@@ -240,7 +248,7 @@ function FieldIcon({ name }: { name: string }) {
       </svg>
     );
   }
-  if (name === 'urn' || name === 'public_profile_url') {
+  if (name === 'urn') {
     return (
       <svg viewBox="0 0 24 24">
         <path d="M10 13a5 5 0 0 0 7.1.1l2-2a5 5 0 0 0-7.1-7.1l-1.1 1.1" {...common} />

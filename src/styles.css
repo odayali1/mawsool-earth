@@ -907,10 +907,17 @@ button { cursor: pointer; }
 }
 .fill-list span b {
   display: block;
-  height: 3px;
-  margin-top: 6px;
+  height: 6px;
+  margin-top: 7px;
   border-radius: 99px;
-  background: linear-gradient(90deg, #00d2ff, #8b6cff);
+  background: rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+}
+.fill-list span b i {
+  display: block;
+  height: 100%;
+  border-radius: 99px;
+  background: linear-gradient(90deg, #00d2ff, #b9a6ff);
 }
 .fill-list strong {
   font-variant-numeric: tabular-nums;

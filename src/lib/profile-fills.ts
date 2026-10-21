@@ -21,7 +21,6 @@ export const PROFILE_FIELDS = [
   { key: 'ingestion_tag', label: 'ingestion_tag', bps: 1_436 },
   { key: 'summary', label: 'summary', bps: 1_397 },
   { key: 'profile_embedding', label: 'profile_embedding', note: 'AI vector search', bps: 1_167 },
-  { key: 'public_profile_url', label: 'public_profile_url', bps: 969 },
   { key: 'badges', label: 'badges', bps: 625 },
   { key: 'languages', label: 'languages', bps: 594 },
   { key: 'certifications', label: 'certifications', bps: 556 },
